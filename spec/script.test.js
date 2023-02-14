@@ -31,12 +31,12 @@ function test(window, expect) {
     bare(window, expect);
   });
   // ! for Advanced Challenge test, Nightmare test release below annotation.
-  describe('Advanced Challenge test', function () {
-    advanced(window, expect);
-  });
-  describe('Nightmare test', function () {
-    nightmare(window, expect);
-  });
+  // describe('Advanced Challenge test', function () {
+  //   advanced(window, expect);
+  // });
+  // describe('Nightmare test', function () {
+  //   nightmare(window, expect);
+  // });
 }
 
 function bare(window, expect) {
@@ -80,7 +80,7 @@ function bare(window, expect) {
       ...operatorButtons,
     ];
 
-    it('after press clear button, 화면에 show according to the order of 0, +, 0, =, 0 .', function (done) {
+    it('after press clear button, screen show according to the order of 0, +, 0, =, 0 .', function (done) {
       const clearButton = window.document.querySelector('.clear');
       const firstOperend = window.document.querySelector(
         '.calculator__operend--left'
@@ -259,7 +259,7 @@ function bare(window, expect) {
 }
 
 function advanced(window, expect) {
-  describe('유어클레스 Advanced Challenge 레슨의 예를 통과합니다.', function () {
+  describe('pass Advanced Challenge', function () {
     afterEach(function () {
       clearButton.dispatchEvent(clickEvent);
     });
@@ -299,8 +299,8 @@ function advanced(window, expect) {
       ...operatorButtons,
     ];
 
-    describe('Step 1 - 숫자 버튼을 누르고 화면에 숫자를 입력하기', function () {
-      it('숫자 버튼을 눌렀을 때, 계산기 화면에 숫자가 보여야 합니다.', function (done) {
+    describe('Step 1 - press number button and put it to screen', function () {
+      it('when press number button, screen should show number.', function (done) {
         const test = ['7', '7'];
         const clicks = test.slice(0, -1);
         const expected = test.slice(-1)[0];
@@ -315,7 +315,7 @@ function advanced(window, expect) {
         done();
       });
 
-      it('숫자 버튼을 여러 번 눌렀을 때, 계산기 화면에 숫자가 이어붙여져야(concatenation) 합니다.', function (done) {
+      it('when press number multiple times, screen should show number continuously(concatenation).', function (done) {
         const test = ['7', '0', '0', '0', '7000'];
         const clicks = test.slice(0, -1);
         const expected = test.slice(-1)[0];
@@ -331,8 +331,8 @@ function advanced(window, expect) {
       });
     });
 
-    describe('Step 2 - Enter 버튼을 눌러 계산하고, AC 버튼으로 초기화 시키기', function () {
-      it('연산자 버튼을 눌렀을 때, 계산기 화면에 보이는 숫자를 따로 저장하고 계산할 준비해야 합니다.', function (done) {
+    describe('Step 2 - calculate with Enter key and AC should Reset', function () {
+      it('when press operator calculator should memory the number and ready to compute.', function (done) {
         const test = ['7', '0', '0', '0', '*', '7000'];
         const clicks = test.slice(0, -1);
         const expected = test.slice(-1)[0];
@@ -347,7 +347,7 @@ function advanced(window, expect) {
         done();
       });
 
-      it('Enter 버튼을 눌렀을 때, 계산기 화면에 보이는 숫자와 따로 저장된 숫자를 함께 조합하여 계산한 결과를 화면에 보여줘야 합니다.', function (done) {
+      it('when press Enter button the current number and memorized number should operate together and show the result.', function (done) {
         const test = ['7', '0', '0', '0', '*', '6', 'Enter', '42000'];
         const clicks = test.slice(0, -1);
         const expected = test.slice(-1)[0];
@@ -362,12 +362,12 @@ function advanced(window, expect) {
         done();
       });
 
-      describe('AC 버튼이 잘 클릭 되는지 테스트 합니다.', function () {
+      describe('test AC button.', function () {
         afterEach(function () {
           clearButton.dispatchEvent(clickEvent);
         });
 
-        it(`AC가 표시된 버튼을 클릭하면 초기화가 되어야 합니다.`, function (done) {
+        it(`AC button should reset.`, function (done) {
           const display = window.document.querySelector(
             '.calculator__display--for-advanced'
           );
@@ -382,12 +382,12 @@ function advanced(window, expect) {
     });
   });
 
-  describe('calculate 함수를 검사합니다.', function () {
-    describe('정수의 연산을 테스트 합니다.', function () {
+  describe('inspect calculate fuction.', function () {
+    describe('test integer number operation.', function () {
       const calculateFuncTest = function (testValue) {
         const { firstNum, operator, displayedNum, result } = testValue;
 
-        it(`${firstNum}과 ${displayedNum}의 합은 ${result}이여야 합니다.`, function (done) {
+        it(`sum of ${firstNum} and ${displayedNum} should be ${result}.`, function (done) {
           const stringInputResult = window.calculate(
             firstNum,
             operator,
@@ -406,7 +406,7 @@ function advanced(window, expect) {
         });
       };
 
-      describe('덧샘 연산을 검사합니다', function () {
+      describe('test addition operation', function () {
         const testArr = [
           { firstNum: '1', operator: '+', displayedNum: '2', result: '3' },
           {
@@ -432,7 +432,7 @@ function advanced(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('뺄샘 연산을 검사합니다', function () {
+      describe('test substraction operation', function () {
         const testArr = [
           { firstNum: '1', operator: '-', displayedNum: '2', result: '-1' },
           {
@@ -458,7 +458,7 @@ function advanced(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('곱샘 연산을 검사합니다', function () {
+      describe('test multiplication operation', function () {
         const testArr = [
           { firstNum: '1', operator: '*', displayedNum: '2', result: '2' },
           {
@@ -479,7 +479,7 @@ function advanced(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('나눗샘 연산을 검사합니다', function () {
+      describe('test division operation', function () {
         const testArr = [
           { firstNum: '4', operator: '/', displayedNum: '2', result: '2' },
           { firstNum: '100', operator: '/', displayedNum: '10', result: '10' },
@@ -501,7 +501,7 @@ function advanced(window, expect) {
     });
   });
 
-  describe('계산기의 작동을 테스트 합니다.', function () {
+  describe('test calculator operation.', function () {
     const clickEvent = new window.MouseEvent('click', {
       bubbles: true,
       cancelable: true,
@@ -541,9 +541,9 @@ function advanced(window, expect) {
       clearButton.dispatchEvent(clickEvent);
     });
 
-    describe('숫자 버튼이 잘 클릭 되는지 테스트 합니다.', function () {
+    describe('test number button.', function () {
       numbers.forEach(function (number) {
-        it(`숫자 버튼을 클릭하면 화면에 숫자가 표시되어야 합니다.`, function (done) {
+        it(`pressing number button should show the number.`, function (done) {
           const button = getButtonBy(number, numberButtons);
           const display = window.document.querySelector(
             '.calculator__display--for-advanced'
@@ -557,8 +557,8 @@ function advanced(window, expect) {
       });
     });
 
-    describe('AC 버튼이 잘 클릭 되는지 테스트 합니다.', function () {
-      it(`AC가 표시된 버튼을 클릭하면 초기화가 되어야 합니다.`, function (done) {
+    describe('test Ac button.', function () {
+      it(`AC button should reset.`, function (done) {
         const display = window.document.querySelector(
           '.calculator__display--for-advanced'
         );
@@ -571,7 +571,7 @@ function advanced(window, expect) {
       });
     });
 
-    describe('기본적인 계산기의 기능을 검사합니다.', function () {
+    describe('test basic fuction of calculator.', function () {
       const bareRequirementTests = [
         ['1', '1', '+', '1', 'Enter', '12'],
         ['1', '1', '-', '1', 'Enter', '10'],
@@ -583,7 +583,7 @@ function advanced(window, expect) {
       bareRequirementTests.forEach(function (test) {
         const clicks = test.slice(0, -1);
         const expected = test.slice(-1)[0];
-        it(`${clicks}를 연속으로 누르면 ${expected}이(가) 화면에 표시되어야 합니다.`, function (done) {
+        it(`press ${clicks} should show  ${expected} on screen.`, function (done) {
           const display = window.document.querySelector(
             '.calculator__display--for-advanced'
           );
@@ -600,12 +600,12 @@ function advanced(window, expect) {
 }
 
 function nightmare(window, expect) {
-  describe('calculate 함수를 검사합니다.', function () {
-    describe('실수 연산을 테스트 합니다.', function () {
+  describe('inspect calculate fuction.', function () {
+    describe('test decimal operation.', function () {
       const calculateFuncTest = function (testValue) {
         const { firstNum, operator, displayedNum, result } = testValue;
 
-        it(`${firstNum}과 ${displayedNum}의 합은 ${result}이여야 합니다.`, function (done) {
+        it(`sum of ${firstNum} and  ${displayedNum} should be ${result}.`, function (done) {
           const stringInputResult = window.calculate(
             firstNum,
             operator,
@@ -624,7 +624,7 @@ function nightmare(window, expect) {
         });
       };
 
-      describe('덧샘 연산을 검사합니다', function () {
+      describe('test addition operation', function () {
         const testArr = [
           {
             firstNum: '0.2341324',
@@ -643,7 +643,7 @@ function nightmare(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('뺄샘 연산을 검사합니다', function () {
+      describe('test subtraction operation', function () {
         const testArr = [
           {
             firstNum: '3.3',
@@ -661,7 +661,7 @@ function nightmare(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('곱샘 연산을 검사합니다', function () {
+      describe('test multiplication operation', function () {
         const testArr = [
           {
             firstNum: '0.124',
@@ -679,7 +679,7 @@ function nightmare(window, expect) {
         testArr.forEach(calculateFuncTest);
       });
 
-      describe('나눗샘 연산을 검사합니다', function () {
+      describe('test division operation', function () {
         const testArr = [
           {
             firstNum: '1.5032644000000002',
@@ -699,7 +699,7 @@ function nightmare(window, expect) {
     });
   });
 
-  describe('계산기의 작동을 테스트 합니다.', function () {
+  describe('test calculator operation.', function () {
     const getButtonBy = function (text, buttons) {
       const result = buttons.filter(function (button) {
         return button.textContent === text;
@@ -739,7 +739,7 @@ function nightmare(window, expect) {
       clearButton.dispatchEvent(clickEvent);
     });
 
-    describe('혹시 발생할 수 있는 특이한 작동 시 기능을 검사합니다.', function () {
+    describe('edge case operation test.', function () {
       const consecutiveEnterTests = [
         ['3', '*', '3', 'Enter', 'Enter', 'Enter', 'Enter', '243'],
         ['3', '-', '3', 'Enter', 'Enter', 'Enter', 'Enter', '-9'],
@@ -908,7 +908,7 @@ function nightmare(window, expect) {
       advancedTests.forEach(function (test) {
         const clicks = test.slice(0, -1);
         const displayedResult = test.slice(-1)[0];
-        it(`${clicks}를 연속으로 누르면 ${displayedResult}이(가) 화면에 표시되어야 합니다.`, function (done) {
+        it(`input ${clicks} continously ${displayedResult} should appear`, function (done) {
           const display = window.document.querySelector(
             '.calculator__display--for-advanced'
           );
