@@ -9,6 +9,21 @@ function calculate(n1, operator, n2) {
   let result = 0;
   // TODO : make function to operate according to the n1, n2, operator.
   // ex) if input is n1 : '1', operator : '+', n2 : '2' , 3 will be returned.
+
+  if (operator == '+') {
+    result = n1 + n2;  
+  }  
+  else if (operator == '-') {
+    result = n1 - n2;  
+  }  
+  else if (operator == '*') {  
+    result = n1 * n2;  
+  }  
+  else {  
+    result = n1 / n2;
+  }  
+  
+
   return String(result);
 }
 
@@ -23,10 +38,22 @@ buttons.addEventListener('click', function (event) {
   if (target.matches('button')) {
     // TODO : make your code to operate calculator
     if (action === 'number') {
-      console.log('number ' + buttonContent + ' button');
+      let num1 = null;
+      let num2 = null;
+      if(num1 === null && num2 === null){
+        num1 = buttonContent;
+        firstOperend.textContent = num1;
+        return
+        
+      } if(num1 === 0 && num2 !== 0){
+        num2 = buttonContent;
+        secondOperend.textContent = num2;
+        console.log(secondOperend);
+      }
     }
 
     if (action === 'operator') {
+      operator.textContent = buttonContent;
       console.log('operator ' + buttonContent + ' button');
     }
 
