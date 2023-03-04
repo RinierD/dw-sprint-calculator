@@ -10,13 +10,13 @@ function calculate(n1, operator, n2) {
   // TODO : make function to operate according to the n1, n2, operator.
   // ex) if input is n1 : '1', operator : '+', n2 : '2' , 3 will be returned.
 
-  if (operator == '+') {
+  if (operator === '+') {
     result = n1 + n2;  
   }  
-  else if (operator == '-') {
+  else if (operator === '-') {
     result = n1 - n2;  
   }  
-  else if (operator == '*') {  
+  else if (operator === '*') {  
     result = n1 * n2;  
   }  
   else {  
@@ -26,6 +26,10 @@ function calculate(n1, operator, n2) {
 
   return String(result);
 }
+
+let num1;
+let num2;
+let numOper = "+";
 
 buttons.addEventListener('click', function (event) {
   // will be triggered when click the buttons.
@@ -37,35 +41,42 @@ buttons.addEventListener('click', function (event) {
 
   if (target.matches('button')) {
     // TODO : make your code to operate calculator
-    if (action === 'number') {
-      let num1 = null;
-      let num2 = null;
-      if(num1 === null && num2 === null){
-        num1 = buttonContent;
+    if (action === "number") {
+      if (firstOperend.textContent === "0") {
+        num1 = parseInt(buttonContent);
         firstOperend.textContent = num1;
-        return
-        
-      } if(num1 === 0 && num2 !== 0){
-        num2 = buttonContent;
+        console.log("Type of value = " + typeof num1 + " - First number " + num1);
+        return num1
+      } else if (firstOperend.textContent !== "0") {
+        num2 = parseInt(buttonContent);
         secondOperend.textContent = num2;
-        console.log(secondOperend);
+        console.log("Type of value = " + typeof num2 + " - Second number " + num2);
       }
     }
 
-    if (action === 'operator') {
+    if (action === 'operator') {      
+      console.log("Operator " + buttonContent + " button");
       operator.textContent = buttonContent;
-      console.log('operator ' + buttonContent + ' button');
+      numOper = buttonContent;
     }
 
     if (action === 'decimal') {
+      alert("This feature is comming soon...")
     }
 
     if (action === 'clear') {
-      console.log('clear button');
+      console.log("reset button");
+      num1 = 0;
+      firstOperend.textContent = num1;
+      numOper = "+"
+      operator.textContent = numOper;
+      num2 = 0;
+      secondOperend.textContent = num2;
+      calculatedResult.textContent = "0";
     }
 
     if (action === 'calculate') {
-      console.log('compute button');
+      calculatedResult.textContent = calculate(num1, numOper, num2);
     }
   }
 });
